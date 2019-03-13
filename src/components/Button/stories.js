@@ -8,7 +8,7 @@ import Button from './Button';
 addDecorator(ThemeDecorator);
 storiesOf('Button')
 	.add('with text', () => (
-		<Button onClick={action('clicked')}>Hello Button</Button>
+		<Button  onClick={action('clicked')}>Hello Button</Button>
 	))
 	.add('with emoji', () => (
 		<Button onClick={action('clicked')}>🚿 🚿 🐈 🐈</Button>
@@ -17,5 +17,8 @@ storiesOf('Button')
 		<Button tag="a" onClick={action('clicked')}>Hello anchor Button</Button>
 	))
 	.add('primary button', () => (
-		<Button type="primary" onClick={action('clicked')}>Hello Button</Button>
+		<Button variation="primary" onClick={action('clicked')}>Hello Button</Button>
+	))
+	.add('primary button dark hover effet', () => (
+		<Button activeEffect="darken" variation="primary" onClick={action('clicked')}>Hello Button</Button>
 	));

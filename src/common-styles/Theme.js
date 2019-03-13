@@ -1,5 +1,5 @@
 import {colorPrimary, colorSecondary, colorDarkest, colorLightest, focusColor, textColorDarkest, textColorLightest,
-    borderWidth, borderRadius, buttonPaddingY, buttonPaddingX, buttonHeight, fontSize, lineHeight, mixinFocus, mixinLighten
+    borderWidth, borderRadius, buttonPaddingY, buttonPaddingX, buttonHeight, fontSize, lineHeight
 } from './Variables';
 
 const Theme = {
@@ -18,10 +18,7 @@ const Theme = {
     buttonHeight: buttonHeight,
 
     fontSize: fontSize,
-    lineHeight: lineHeight,
-
-    mixinFocus: mixinFocus,
-    mixinLighten: mixinLighten
+    lineHeight: lineHeight
 };
 
 export default Theme;

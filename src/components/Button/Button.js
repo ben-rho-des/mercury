@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { darken, lighten } from 'polished';
 
 const e = React.createElement
 
@@ -10,8 +11,7 @@ const ButtonEle = styled(({ tag = 'button', children, ...props }) => e(tag, prop
 	cursor: pointer;
 	display: inline-block;
 	font-size: ${props => props.theme.fontSize};
-	height: ${props => props.theme.buttonHeight}
-	line-height: ${props => props.theme.lineHeight};
+	min-height: ${props => props.theme.buttonHeight};
 	outline: none;
 	padding: ${props => props.theme.buttonPaddingY} ${props => props.theme.buttonPaddingX};
 	text-align: center;
@@ -20,36 +20,81 @@ const ButtonEle = styled(({ tag = 'button', children, ...props }) => e(tag, prop
 	user-select: none;
 	vertical-align: middle;
 	white-space: nowrap;
+
+	${props => props.tag === 'a' ? `
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	` : null}
+
 	&:focus {
-		${props => props.theme.mixinFocus(props.theme.focusColor)}
+		box-shadow: 0 0 0 .1rem ${props => props.theme.focusColor}
 	}
-	
-	background: ${props => props.theme.colorDarkest};
-	border: ${props => props.theme.borderWidth} solid ${props => props.theme.colorDarkest};
-	color: ${props => props.theme.colorLightest};
+	background: ${props =>
+		(!props.variation && props.theme.colorDarkest) || 
+		(props.variation === 'primary' && props.theme.colorPrimary) ||
+		(props.variation === 'secondary' && props.theme.colorSecondary)
+	};
+	border-style: solid;
+	border-width: ${props => props.theme.borderWidth};
+	border-color: ${props =>
+		(!props.variation && props.theme.colorDarkest) || 
+		(props.variation === 'primary' && props.theme.colorPrimary) ||
+		(props.variation === 'secondary' && props.theme.colorSecondary)
+	};
+	color: ${props =>
+		(!props.variation && props.theme.colorLightest) || 
+		(props.variation === 'primary' && props.theme.colorLightest) ||
+		(props.variation === 'secondary' && props.theme.colorLightest)
+	};
 	&:focus,
 	&:hover {
-		${props => props.theme.mixinLighten('background', props.theme.colorDarkest, '20')};
-		${props => props.theme.mixinLighten('border-color', props.theme.colorDarkest, '20')};
+		background: ${props =>
+			(!props.activeEffect && lighten(0.2, props.theme.colorDarkest)) || 
+			(props.activeEffect === 'darken' && darken(0.2, props.theme.colorDarkest))
+		};
+
+		border-color: ${props =>
+			(!props.activeEffect && lighten(0.2, props.theme.colorDarkest)) || 
+			(props.activeEffect === 'darken' && darken(0.2, props.theme.colorDarkest))
+		};
 		text-decoration: none;
 	}
 	&:active {
-		${props => props.theme.mixinLighten('background', props.theme.colorDarkest, '30')};
-		${props => props.theme.mixinLighten('border-color', props.theme.colorDarkest, '30')};
+		background: ${props =>
+			(!props.activeEffect && lighten(0.3, props.theme.colorDarkest)) || 
+			(props.activeEffect === 'darken' && darken(0.3, props.theme.colorDarkest))
+		};
+
+		border-color: ${props =>
+			(!props.activeEffect && lighten(0.3, props.theme.colorDarkest)) || 
+			(props.activeEffect === 'darken' && darken(0.3, props.theme.colorDarkest))
+		};
 	}
 
-	&[type='primary'] {
-		background: ${props => props.theme.colorPrimary};
-		border: ${props => props.theme.borderWidth} solid ${props => props.theme.colorPrimary};
-		color: ${props => props.theme.colorLightest};
-	} 
-	[type='primary']&:hover {
-		${props => props.theme.mixinLighten('background', '#0f0', '5')};
-		${props => props.theme.mixinLighten('border-color', '#f00', '5')};
+	[variation='primary']&:focus,
+	[variation='primary']&:hover {
+		background: ${props =>
+			(!props.activeEffect && lighten(0.05, props.theme.colorPrimary)) || 
+			(props.activeEffect === 'darken' && darken(0.1, props.theme.colorPrimary))
+		};
+
+		border-color: ${props =>
+			(!props.activeEffect && lighten(0.05, props.theme.colorPrimary)) || 
+			(props.activeEffect === 'darken' && darken(0.2, props.theme.colorPrimary))
+		};
+		text-decoration: none;
 	}
-	[type='primary']&:active {
-		${props => props.theme.mixinLighten('background', props.theme.colorPrimary, '15')};
-			${props => props.theme.mixinLighten('border-color', props.theme.colorPrimary, '15')};
+	[variation='primary']&:active {
+		background: ${props =>
+			(!props.activeEffect && lighten(0.15, props.theme.colorPrimary)) || 
+			(props.activeEffect === 'darken' && darken(0.3, props.theme.colorPrimary))
+		};
+
+		border-color: ${props =>
+			(!props.activeEffect && lighten(0.15, props.theme.colorPrimary)) || 
+			(props.activeEffect === 'darken' && darken(0.3, props.theme.colorPrimary))
+		};
 	}
 `
 
