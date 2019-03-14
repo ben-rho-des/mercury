@@ -114,7 +114,7 @@ const ButtonEle = styled(({ tag, children, ...props }) => React.createElement(ta
 	}
 `;
 
-const Button = ({children, activeEffect, variation, theme, href}) => {
+const Button = ({children, activeEffect, variation, theme, href, onClick}) => {
 	// wrap the plain text children in a span to allow :first-child selections of svg
 	const wrappedTextChildren = typeof children === 'object' ? 
 		children.map(child => typeof child === 'string' ? <span key="text">{child}</span> : child) :
@@ -132,7 +132,9 @@ const Button = ({children, activeEffect, variation, theme, href}) => {
 		variation: variation,
 		theme: theme,
 		activeeffect: activeEffect,
-		tag: href ? 'a' : 'button'
+		tag: href ? 'a' : 'button',
+		href: href,
+		onClick: onClick
 	};
 
 	return <ButtonEle {...eleProps}>{wrappedTextChildren}</ButtonEle> ;
@@ -147,5 +149,6 @@ Button.propTypes = {
 Button.defaultProps = {
 	activeEffect: 'lighten'
 };
+
 
 export default Button;
