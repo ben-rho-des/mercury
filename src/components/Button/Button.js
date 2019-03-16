@@ -4,10 +4,8 @@ import classNames from 'classnames';
 import styled from 'styled-components';
 import { darken, lighten } from 'polished';
 
-import { product } from '../../settings';
-
 /* need to seperate from background and below better, eg make mixins come from a utils js file rather then from theme... theme can use same util methods */
-const ButtonEle = styled(({ tag, children, ...props }) => React.createElement(tag, props, children))`
+const ButtonEle = styled.button`
 	appearance: none;
 	border-radius: ${props => props.theme.borderRadius};
 	cursor: pointer;
@@ -47,31 +45,31 @@ const ButtonEle = styled(({ tag, children, ...props }) => React.createElement(ta
 	&:focus,
 	&:hover {
 		background: ${props =>
-			(props.activeeffect === 'lighten' && lighten(0.2, props.theme.colorDarkest)) || 
-			(props.activeeffect === 'darken' && darken(0.2, props.theme.colorDarkest))
+			(props.effect === 'lighten' && lighten(0.2, props.theme.colorDarkest)) || 
+			(props.effect === 'darken' && darken(0.2, props.theme.colorDarkest))
 		};
 
 		border-color: ${props =>
-			(props.activeeffect === 'lighten' && lighten(0.2, props.theme.colorDarkest)) || 
-			(props.activeeffect === 'darken' && darken(0.2, props.theme.colorDarkest))
+			(props.effect === 'lighten' && lighten(0.2, props.theme.colorDarkest)) || 
+			(props.effect === 'darken' && darken(0.2, props.theme.colorDarkest))
 		};
 		text-decoration: none;
 	}
 	&:active {
 		background: ${props =>
-			(props.activeeffect === 'lighten' && lighten(0.3, props.theme.colorDarkest)) || 
-			(props.activeeffect === 'darken' && darken(0.3, props.theme.colorDarkest))
+			(props.effect === 'lighten' && lighten(0.3, props.theme.colorDarkest)) || 
+			(props.effect === 'darken' && darken(0.3, props.theme.colorDarkest))
 		};
 
 		border-color: ${props =>
-			(props.activeeffect === 'lighten' && lighten(0.3, props.theme.colorDarkest)) || 
-			(props.activeeffect === 'darken' && darken(0.3, props.theme.colorDarkest))
+			(props.effect === 'lighten' && lighten(0.3, props.theme.colorDarkest)) || 
+			(props.effect === 'darken' && darken(0.3, props.theme.colorDarkest))
 		};
 	}
 
 	/* ---------------- vertical height fix on anchors ---------------- */
 
-	${props => props.tag === 'a' ? `
+	${props => props.as === 'a' ? `
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -80,74 +78,76 @@ const ButtonEle = styled(({ tag, children, ...props }) => React.createElement(ta
 	/* ---------------- Variations ---------------- */
 
 	
-	.${product}--btn--primary&:focus,
-	.${product}--btn--primary&:hover {
+	.mercury-btn--primary&:focus,
+	.mercury-btn--primary&:hover {
 		background: ${props =>
-			(props.activeeffect === 'lighten' && lighten(0.05, props.theme.colorPrimary)) || 
-			(props.activeeffect === 'darken' && darken(0.1, props.theme.colorPrimary))
+			(props.effect === 'lighten' && lighten(0.05, props.theme.colorPrimary)) || 
+			(props.effect === 'darken' && darken(0.1, props.theme.colorPrimary))
 		};
 
 		border-color: ${props =>
-			(props.activeeffect === 'lighten' && lighten(0.05, props.theme.colorPrimary)) || 
-			(props.activeeffect === 'darken' && darken(0.2, props.theme.colorPrimary))
+			(props.effect === 'lighten' && lighten(0.05, props.theme.colorPrimary)) || 
+			(props.effect === 'darken' && darken(0.2, props.theme.colorPrimary))
 		};
 	}
-	.${product}--btn--primary&:active {
+	.mercury-btn--primary&:active {
 		background: ${props =>
-			(props.activeeffect === 'lighten' && lighten(0.15, props.theme.colorPrimary)) || 
-			(props.activeeffect === 'darken' && darken(0.3, props.theme.colorPrimary))
+			(props.effect === 'lighten' && lighten(0.15, props.theme.colorPrimary)) || 
+			(props.effect === 'darken' && darken(0.3, props.theme.colorPrimary))
 		};
 
 		border-color: ${props =>
-			(props.activeeffect === 'lighten' && lighten(0.15, props.theme.colorPrimary)) || 
-			(props.activeeffect === 'darken' && darken(0.3, props.theme.colorPrimary))
+			(props.effect === 'lighten' && lighten(0.15, props.theme.colorPrimary)) || 
+			(props.effect === 'darken' && darken(0.3, props.theme.colorPrimary))
 		};
 	}
 	
 
 	/* ---------------- For adding some trickery margin on icons ---------------- */
-	> span:first-child > svg {
+	> .mercury-icon:first-child {
 		margin-right: 7px;
 	}
-	> span:last-child > svg {
+	> .mercury-icon:last-child {
 		margin-left: 7px;
 	}
 `;
 
-const Button = ({children, activeEffect, variation, theme, href, onClick}) => {
+const Button = ({children, href, effect, variation, ...restProps}) => {
+
 	// wrap the plain text children in a span to allow :first-child selections of svg
 	const wrappedTextChildren = typeof children === 'object' ? 
 		children.map(child => typeof child === 'string' ? <span key="text">{child}</span> : child) :
 		children;
 
 	const buttonClasses = classNames({
-		[`${product}--btn`]: true,
-		[`${product}--btn--primary`]: variation === 'primary',
-		[`${product}--btn--secondary`]: variation === 'secondary',
-		[`${product}--btn--dark-effect`]: variation === 'darken'
+		[`mercury-btn`]: true,
+		[`mercury-btn--primary`]: variation === 'primary',
+		[`mercury-btn--secondary`]: variation === 'secondary',
+		[`mercury-btn--dark-effect`]: effect === 'darken'
 	});
-
+	
 	const eleProps = {
 		className: buttonClasses,
+
+		effect: effect,
+		as: href ? 'a' : 'button',
 		variation: variation,
-		theme: theme,
-		activeeffect: activeEffect,
-		tag: href ? 'a' : 'button',
-		href: href,
-		onClick: onClick
+		role: !href ? 'button' : null,
+		...restProps
 	};
 
-	return <ButtonEle {...eleProps}>{wrappedTextChildren}</ButtonEle> ;
+	return <ButtonEle {...eleProps} >{wrappedTextChildren}</ButtonEle> ;
 }
 
 Button.propTypes = {
-	tag: PropTypes.string,
+	href: PropTypes.string,
 	variation: PropTypes.string,
-	activeEffect: PropTypes.string
+	effect: PropTypes.string
 };
   
 Button.defaultProps = {
-	activeEffect: 'lighten'
+	effect: 'lighten',
+	variation: ''
 };
 
 

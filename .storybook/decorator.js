@@ -1,8 +1,8 @@
 import React from 'react';
-import { ThemeProvider, injectGlobal } from 'styled-components';
+import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import { Theme, Global } from '../src/common-styles';
 
-injectGlobal`
+const GlobalStyle = createGlobalStyle`
   html, .sb-show-main, .sb-show-main #root {
       height: 100%;
   }
@@ -15,4 +15,4 @@ const centerDecorationStyle = {
     height: '100%'
 }
 
-export const ThemeDecorator = storyFn => <div style={centerDecorationStyle}><ThemeProvider theme={Theme}>{storyFn()}</ThemeProvider></div>;
+export const ThemeDecorator = storyFn => <div style={centerDecorationStyle}><GlobalStyle /><ThemeProvider theme={Theme}>{storyFn()}</ThemeProvider></div>;

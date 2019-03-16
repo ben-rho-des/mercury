@@ -6,7 +6,8 @@ const createIconComponent = ({
   height,
   width
 }) => props => createElement('svg', { ...props,
-  viewBox: `0 0 ${width} ${height}`
+  viewBox: `0 0 ${width} ${height}`,
+  className: 'mercury-icon'
 }, content);
 
 export default createIconComponent;

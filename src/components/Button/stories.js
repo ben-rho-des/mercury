@@ -23,10 +23,10 @@ storiesOf('Button')
 		<Button variation="primary" onClick={action('clicked')}>Hello Button</Button>
 	))
 	.add('primary button dark hover effect', () => (
-		<Button activeEffect="darken" variation="primary" onClick={action('clicked')}>Hello Button</Button>
+		<Button effect="darken" variation="primary" onClick={action('clicked')}>Hello Button</Button>
 	))
 	.add('primary button with icon before', () => (
-		<Button variation="primary" onClick={action('clicked')}><Icon src={<IconCircle/>} />Hello Button</Button>
+		<Button variation="primary" onClick={action('clicked')}><IconCircle/>Hello Button</Button>
 	))
 	.add('primary button with icon after', () => (
 		<Button variation="primary" onClick={action('clicked')}>Hello Button <Icon src={<IconCircle/>} /></Button>
