@@ -53,7 +53,8 @@ const ButtonEle = styled.button`
 			(props.effect === 'lighten' && lighten(0.2, props.theme.colorDarkest)) || 
 			(props.effect === 'darken' && darken(0.2, props.theme.colorDarkest))
 		};
-		text-decoration: none;
+		text-decoration: underline;
+		
 	}
 	&:active {
 		background: ${props =>
@@ -116,7 +117,7 @@ const Button = ({children, href, effect, variation, ...restProps}) => {
 
 	// wrap the plain text children in a span to allow :first-child selections of svg
 	const wrappedTextChildren = typeof children === 'object' ? 
-		children.map(child => typeof child === 'string' ? <span key="text">{child}</span> : child) :
+		children.map(child => typeof child === 'string' ? <span key="text">{child.trim()}</span> : child) :
 		children;
 
 	const buttonClasses = classNames({

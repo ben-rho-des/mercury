@@ -2,8 +2,8 @@ import {colorPrimary, colorSecondary, colorDarkest, colorLightest, focusColor, t
     borderWidth, borderRadius, buttonPaddingY, buttonPaddingX, buttonHeight, fontSize, lineHeight
 } from './Variables';
 
-const Theme = {
-    name: 'default',
+const ThemeCircular = {
+    name: 'Circular',
     colorPrimary: colorPrimary,
     colorSecondary: colorSecondary,
     colorDarkest: colorDarkest,
@@ -13,7 +13,7 @@ const Theme = {
     textColorLightest: textColorLightest,
 
     borderWidth: borderWidth,
-    borderRadius: borderRadius,
+    borderRadius: '40px',
     buttonPaddingY: buttonPaddingY,
     buttonPaddingX: buttonPaddingX,
     buttonHeight: buttonHeight,
@@ -22,4 +22,4 @@ const Theme = {
     lineHeight: lineHeight
 };
 
-export default Theme;
+export default ThemeCircular;

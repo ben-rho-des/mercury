@@ -2,9 +2,9 @@ import {colorPrimary, colorSecondary, colorDarkest, colorLightest, focusColor, t
     borderWidth, borderRadius, buttonPaddingY, buttonPaddingX, buttonHeight, fontSize, lineHeight
 } from './Variables';
 
-const Theme = {
-    name: 'default',
-    colorPrimary: colorPrimary,
+const ThemeBoxed = {
+    name: 'Boxed',
+    colorPrimary: '#4B67CB',
     colorSecondary: colorSecondary,
     colorDarkest: colorDarkest,
     colorLightest: colorLightest,
@@ -13,7 +13,7 @@ const Theme = {
     textColorLightest: textColorLightest,
 
     borderWidth: borderWidth,
-    borderRadius: borderRadius,
+    borderRadius: '0',
     buttonPaddingY: buttonPaddingY,
     buttonPaddingX: buttonPaddingX,
     buttonHeight: buttonHeight,
@@ -22,4 +22,4 @@ const Theme = {
     lineHeight: lineHeight
 };
 
-export default Theme;
+export default ThemeBoxed;
