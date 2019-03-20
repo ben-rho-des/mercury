@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 import { ThemeDecorator } from '../../../.storybook/decorator';
 
 // import built icons from this repo to showcase icons
-import IconCircle from '../../../build/icons/react-icons/circle';
+import IconCircle from '../../../build/icons/mercury-icons/circle';
 import Button from './Button';
 
 addDecorator(ThemeDecorator)
