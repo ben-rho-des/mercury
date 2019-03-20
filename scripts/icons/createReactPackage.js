@@ -45,7 +45,7 @@ export default createIconComponent;
  * Template: package.json
  */
 const getPackageJsonSource = ({ version }) => `{
-  "name": "@acme/react-icons",
+  "name": "@mercury/icons",
   "version": "${version}",
   "peerDependencies": {
     "react": ">=16.2.0",
@@ -75,7 +75,7 @@ const createReactPackage = (svgs, version) => {
   });
 
   return {
-    name: 'react-icons',
+    name: 'mercury-icons',
     files
   }
 }
